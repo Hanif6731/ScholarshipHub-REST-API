@@ -1,0 +1,271 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ScholarshipHubModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="salary" Type="Int32" Nullable="false" />
+    <Property Name="balance" Type="Int32" Nullable="false" />
+    <Property Name="salarystatus" Type="Int32" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ApplicationsToOrganization">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StudentId" Type="Int32" Nullable="false" />
+    <Property Name="organizationsOfferID" Type="Int32" Nullable="false" />
+    <Property Name="Motivation" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="StudentBio" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AplicationStatus" Type="Int32" />
+    <Property Name="ApplicationInformation" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="OrganizationOffer" Relationship="Self.FK_ApplicationsToOrganization_OrganizationOffers" FromRole="ApplicationsToOrganization" ToRole="OrganizationOffers" />
+    <NavigationProperty Name="Student" Relationship="Self.FK_ApplicationsToOrganization_Students" FromRole="ApplicationsToOrganization" ToRole="Students" />
+  </EntityType>
+  <EntityType Name="ApplictionsToUniversity">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StudentId" Type="Int32" Nullable="false" />
+    <Property Name="UniversityOfferID" Type="Int32" Nullable="false" />
+    <Property Name="Motivation" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="StudentBio" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AplicationStatus" Type="Int32" />
+    <Property Name="ApplicationInformation" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="UniversityOffer" Relationship="Self.FK_ApplictionsToUniversity_Students" FromRole="ApplictionsToUniversity" ToRole="UniversityOffers" />
+    <NavigationProperty Name="Student" Relationship="Self.FK_ApplictionsToUniversity_Students1" FromRole="ApplictionsToUniversity" ToRole="Students" />
+  </EntityType>
+  <EntityType Name="Messege">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FromUser" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ToUser" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Subject" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Body" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Time" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Organisation">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AddressLine" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Postal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ApprovalPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Information" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="OrganizationOffers" Relationship="Self.FK_OrganizationOffers_Organisations" FromRole="Organisations" ToRole="OrganizationOffers" />
+  </EntityType>
+  <EntityType Name="OrganizationOffer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="degree" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="startdate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="deadline" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="percentage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="universityName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="totalseat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="organization_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ApplicationsToOrganizations" Relationship="Self.FK_ApplicationsToOrganization_OrganizationOffers" FromRole="OrganizationOffers" ToRole="ApplicationsToOrganization" />
+    <NavigationProperty Name="Organisation" Relationship="Self.FK_OrganizationOffers_Organisations" FromRole="OrganizationOffers" ToRole="Organisations" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ImagePath" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CVPath" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DesiredDegree" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="ApplicationsToOrganizations" Relationship="Self.FK_ApplicationsToOrganization_Students" FromRole="Students" ToRole="ApplicationsToOrganization" />
+    <NavigationProperty Name="ApplictionsToUniversities" Relationship="Self.FK_ApplictionsToUniversity_Students1" FromRole="Students" ToRole="ApplictionsToUniversity" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="University">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Contact" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AddressLine" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Contry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Zip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Motto" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Mission" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Vision" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="descripton" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ApprovalPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="UniversityOffers" Relationship="Self.FK_UniversityOffers_University" FromRole="Universities" ToRole="UniversityOffers" />
+  </EntityType>
+  <EntityType Name="UniversityOffer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="OfferedDegree" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Requirements" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Deadline" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="UniversityId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ApplictionsToUniversities" Relationship="Self.FK_ApplictionsToUniversity_Students" FromRole="UniversityOffers" ToRole="ApplictionsToUniversity" />
+    <NavigationProperty Name="University" Relationship="Self.FK_UniversityOffers_University" FromRole="UniversityOffers" ToRole="Universities" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_ApplicationsToOrganization_OrganizationOffers">
+    <End Role="OrganizationOffers" Type="Self.OrganizationOffer" Multiplicity="1" />
+    <End Role="ApplicationsToOrganization" Type="Self.ApplicationsToOrganization" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrganizationOffers">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ApplicationsToOrganization">
+        <PropertyRef Name="organizationsOfferID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ApplicationsToOrganization_Students">
+    <End Role="Students" Type="Self.Student" Multiplicity="1" />
+    <End Role="ApplicationsToOrganization" Type="Self.ApplicationsToOrganization" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ApplicationsToOrganization">
+        <PropertyRef Name="StudentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ApplictionsToUniversity_Students">
+    <End Role="UniversityOffers" Type="Self.UniversityOffer" Multiplicity="1" />
+    <End Role="ApplictionsToUniversity" Type="Self.ApplictionsToUniversity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UniversityOffers">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ApplictionsToUniversity">
+        <PropertyRef Name="UniversityOfferID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ApplictionsToUniversity_Students1">
+    <End Role="Students" Type="Self.Student" Multiplicity="1" />
+    <End Role="ApplictionsToUniversity" Type="Self.ApplictionsToUniversity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ApplictionsToUniversity">
+        <PropertyRef Name="StudentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrganizationOffers_Organisations">
+    <End Role="Organisations" Type="Self.Organisation" Multiplicity="1" />
+    <End Role="OrganizationOffers" Type="Self.OrganizationOffer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organisations">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="OrganizationOffers">
+        <PropertyRef Name="organization_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UniversityOffers_University">
+    <End Role="Universities" Type="Self.University" Multiplicity="1" />
+    <End Role="UniversityOffers" Type="Self.UniversityOffer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Universities">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="UniversityOffers">
+        <PropertyRef Name="UniversityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ScholarshipHubDataContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Admins" EntityType="Self.Admin" />
+    <EntitySet Name="ApplicationsToOrganizations" EntityType="Self.ApplicationsToOrganization" />
+    <EntitySet Name="ApplictionsToUniversities" EntityType="Self.ApplictionsToUniversity" />
+    <EntitySet Name="Messeges" EntityType="Self.Messege" />
+    <EntitySet Name="Organisations" EntityType="Self.Organisation" />
+    <EntitySet Name="OrganizationOffers" EntityType="Self.OrganizationOffer" />
+    <EntitySet Name="Students" EntityType="Self.Student" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Universities" EntityType="Self.University" />
+    <EntitySet Name="UniversityOffers" EntityType="Self.UniversityOffer" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_ApplicationsToOrganization_OrganizationOffers" Association="Self.FK_ApplicationsToOrganization_OrganizationOffers">
+      <End Role="OrganizationOffers" EntitySet="OrganizationOffers" />
+      <End Role="ApplicationsToOrganization" EntitySet="ApplicationsToOrganizations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ApplicationsToOrganization_Students" Association="Self.FK_ApplicationsToOrganization_Students">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="ApplicationsToOrganization" EntitySet="ApplicationsToOrganizations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ApplictionsToUniversity_Students" Association="Self.FK_ApplictionsToUniversity_Students">
+      <End Role="UniversityOffers" EntitySet="UniversityOffers" />
+      <End Role="ApplictionsToUniversity" EntitySet="ApplictionsToUniversities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ApplictionsToUniversity_Students1" Association="Self.FK_ApplictionsToUniversity_Students1">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="ApplictionsToUniversity" EntitySet="ApplictionsToUniversities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrganizationOffers_Organisations" Association="Self.FK_OrganizationOffers_Organisations">
+      <End Role="Organisations" EntitySet="Organisations" />
+      <End Role="OrganizationOffers" EntitySet="OrganizationOffers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UniversityOffers_University" Association="Self.FK_UniversityOffers_University">
+      <End Role="Universities" EntitySet="Universities" />
+      <End Role="UniversityOffers" EntitySet="UniversityOffers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
