@@ -22,5 +22,6 @@ namespace ScholarshipHubRestApi.Models
         public int balance { get; set; }
         public int salarystatus { get; set; }
         public string email { get; set; }
+        public List<Links> links = new List<Links>();
     }
 }

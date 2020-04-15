@@ -18,5 +18,6 @@ namespace ScholarshipHubRestApi.Models
         public string Username { get; set; }
         public string Password { get; set; }
         public int Status { get; set; }
+        public List<Links> links = new List<Links>();
     }
 }

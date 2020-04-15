@@ -20,5 +20,6 @@ namespace ScholarshipHubRestApi.Models
         public string Subject { get; set; }
         public string Body { get; set; }
         public Nullable<System.DateTime> Time { get; set; }
+        public List<Links> links = new List<Links>();
     }
 }

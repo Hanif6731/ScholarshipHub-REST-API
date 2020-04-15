@@ -24,5 +24,6 @@ namespace ScholarshipHubRestApi.Models
     
         public virtual UniversityOffer UniversityOffer { get; set; }
         public virtual Student Student { get; set; }
+        public List<Links> links = new List<Links>();
     }
 }

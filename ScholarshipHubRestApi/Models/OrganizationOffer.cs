@@ -35,5 +35,7 @@ namespace ScholarshipHubRestApi.Models
         //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         [XmlIgnore, JsonIgnore] public virtual ICollection<ApplicationsToOrganization> ApplicationsToOrganizations { get; set; }
         public virtual Organisation Organisation { get; set; }
+        public List<Links> links = new List<Links>();
+
     }
 }
