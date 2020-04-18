@@ -109,6 +109,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Attributes\BasicAuthenticationAttribute.cs" />
     <Compile Include="Controllers\ApplicationsToUniversityController.cs" />
     <Compile Include="Controllers\UniversityController.cs" />
     <Compile Include="Controllers\UniversityOfferController.cs" />
