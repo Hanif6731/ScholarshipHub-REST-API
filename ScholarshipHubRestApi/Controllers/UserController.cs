@@ -30,11 +30,11 @@ namespace ScholarshipHubRestApi.Controllers
             }
         }
 
-        [Route("user", Name ="GetUserByUsername")]
+        [Route("{username}/", Name ="GetUserByUsername")]
         // GET api/<controller>/5
-        public IHttpActionResult Get(User user_)
+        public IHttpActionResult Get(string username)
         {
-            var user = uRep.GetUser(user_.Username);
+            var user = uRep.GetUser(username);
 
             if (uRep.Get(user) == 1)
             {
@@ -51,11 +51,11 @@ namespace ScholarshipHubRestApi.Controllers
         public IHttpActionResult Post([FromBody]User user)
         {
             uRep.Insert(user);
-            string url = Url.Link("GetUserByUsername", new { user });
+            string url = Url.Link("GetUserByUsername", new { username = user.Username });
             return Created(url, user);
         }
 
-        [Route("id")]
+        [Route("{id}")]
         // PUT api/<controller>/5
         public IHttpActionResult Put([FromBody]User user, [FromUri]int id)
         {
@@ -65,7 +65,7 @@ namespace ScholarshipHubRestApi.Controllers
             return Ok(user);
         }
 
-        [Route("id")]
+        [Route("{id}")]
         // DELETE api/<controller>/5
         public IHttpActionResult Delete(int id)
         {

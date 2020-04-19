@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ScholarshipHubRestApi.Interfaces;
+using ScholarshipHubRestApi.Models;
+using ScholarshipHubRestApi.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -7,33 +10,58 @@ using System.Web.Http;
 
 namespace ScholarshipHubRestApi.Controllers
 {
+    [RoutePrefix("api/universities")]
     public class UniversityController : ApiController
     {
+        IUserRepository uRep = new UserRepository();
+        IUniversityRepository uniRep = new UniversityRepository();
+
+        [Route("")]
         // GET api/<controller>
-        public IEnumerable<string> Get()
+        public IHttpActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            var universities = uniRep.GetAll();
+
+            return Ok(universities);
         }
 
+        [Route("{username}/",Name ="GetUniByUsername")]
         // GET api/<controller>/5
-        public string Get(int id)
+        public IHttpActionResult Get(string username)
         {
-            return "value";
+            var university = uniRep.GetUniversity(username);
+            return Ok(university);
         }
 
+        [Route("")]
         // POST api/<controller>
-        public void Post([FromBody]string value)
+        public IHttpActionResult Post([FromBody]University university)
         {
+            
+            var user = new User();
+            user.Username = university.username;
+            user.Password = university.password;
+            user.Status = 2;
+            uRep.Insert(user);
+            uniRep.Insert(university);
+            string url = Url.Link("GetUniByUsername", new { username = university.username });
+            return Created(url, university);
         }
-
+        [Route("{id}")]
         // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
+        public IHttpActionResult Put([FromUri]int id, [FromBody]University university)
         {
+            university.id = id;
+            uniRep.Update(university);
+            return Ok(university);
         }
 
+        [Route("{id}")]
         // DELETE api/<controller>/5
-        public void Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
+            uniRep.Delete(id);
+            return StatusCode(HttpStatusCode.NoContent);
         }
     }
 }
