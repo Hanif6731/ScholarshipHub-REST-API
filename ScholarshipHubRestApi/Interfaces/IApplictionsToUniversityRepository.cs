@@ -9,7 +9,7 @@ namespace ScholarshipHubRestApi.Interfaces
 {
     interface IApplictionsToUniversityRepository : IRepository<ApplictionsToUniversity>
     {
-        IEnumerable<ApplictionsToUniversity> GetAll(int uniId);
+        IEnumerable<ApplictionsToUniversity> GetAll(int uniOfferId);
         IEnumerable<ApplictionsToUniversity> GetStudentsApplicationToUniversity(int studentId);
     }
 }
