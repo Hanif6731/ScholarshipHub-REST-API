@@ -13,6 +13,12 @@ namespace ScholarshipHubRestApi.Repository
         {
             return context.Set<ApplictionsToUniversity>().Where(u => u.UniversityOfferID == uniOfferId).ToList();
         }
+
+        public IEnumerable<ApplictionsToUniversity> GetAllApplications(int UniversityId)
+        {
+            return context.Set<ApplictionsToUniversity>().Where(u => u.UniversityOffer.UniversityId == UniversityId).ToList();
+        }
+
         public IEnumerable<ApplictionsToUniversity> GetStudentsApplicationToUniversity(int studentId)
         {
             return context.Set<ApplictionsToUniversity>().Where(u =>u.StudentId==studentId).ToList();

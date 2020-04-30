@@ -1,4 +1,5 @@
-﻿using ScholarshipHubRestApi.Interfaces;
+﻿using ScholarshipHubRestApi.Attributes;
+using ScholarshipHubRestApi.Interfaces;
 using ScholarshipHubRestApi.Models;
 using ScholarshipHubRestApi.Repository;
 using System;
@@ -17,23 +18,32 @@ namespace ScholarshipHubRestApi.Controllers
         IUniversityRepository uniRep = new UniversityRepository();
 
         [Route("")]
+        [BasicAuthentication]
         // GET api/<controller>
         public IHttpActionResult Get()
         {
             var universities = uniRep.GetAll();
 
+            foreach(University university in universities)
+            {
+                linkGen(university);
+            }
+
             return Ok(universities);
         }
 
         [Route("{username}/",Name ="GetUniByUsername")]
+        [BasicAuthentication]
         // GET api/<controller>/5
         public IHttpActionResult Get(string username)
         {
             var university = uniRep.GetUniversity(username);
+            linkGen(university);
             return Ok(university);
         }
 
         [Route("")]
+        [BasicAuthentication]
         // POST api/<controller>
         public IHttpActionResult Post([FromBody]University university)
         {
@@ -44,24 +54,38 @@ namespace ScholarshipHubRestApi.Controllers
             user.Status = 2;
             uRep.Insert(user);
             uniRep.Insert(university);
+            linkGen(university);
             string url = Url.Link("GetUniByUsername", new { username = university.username });
             return Created(url, university);
         }
         [Route("{id}")]
+        [BasicAuthentication]
         // PUT api/<controller>/5
         public IHttpActionResult Put([FromUri]int id, [FromBody]University university)
         {
             university.id = id;
             uniRep.Update(university);
+            linkGen(university);
             return Ok(university);
         }
 
         [Route("{id}")]
+        [BasicAuthentication]
         // DELETE api/<controller>/5
         public IHttpActionResult Delete(int id)
         {
             uniRep.Delete(id);
             return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        [NonAction]
+        public void linkGen(University university)
+        {
+            university.links.Add(new Links() { HRef = "http://localhost:44348/api/universities", Method = "GET", Rel = "Get all the universities list" });
+            university.links.Add(new Links() { HRef = "http://localhost:44348/api/universities/" + university.username+"/", Method = "GET", Rel = "Get an university user by username" });
+            university.links.Add(new Links() { HRef = "http://localhost:44348/api/universities", Method = "POST", Rel = "Create a new university resource" });
+            university.links.Add(new Links() { HRef = "http://localhost:44348/api/universities/" + university.id, Method = "PUT", Rel = "Modify an existing uinversity resource" });
+            university.links.Add(new Links() { HRef = "http://localhost:44348/api/universities/" + university.id, Method = "DELETE", Rel = "Delete an existing university resource" });
         }
     }
 }

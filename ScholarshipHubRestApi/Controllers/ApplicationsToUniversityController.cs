@@ -4,39 +4,58 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using ScholarshipHubRestApi.Attributes;
 using ScholarshipHubRestApi.Interfaces;
 using ScholarshipHubRestApi.Models;
 using ScholarshipHubRestApi.Repository;
 
 namespace ScholarshipHubRestApi.Controllers
 {
-    [RoutePrefix("api")]
+    [RoutePrefix("api/universities/{uId}")]
     public class ApplicationsToUniversityController : ApiController
     {
         IApplictionsToUniversityRepository apRep = new ApplictionsToUniversityRepository();
-        [Route("univerisityOffer/{oId}/applications",Name ="applicationsInOffer")]
+        [Route("Offers/{oId}/applications")]
+        [BasicAuthentication]
         // GET api/<controller>
         public IHttpActionResult Get(int oId)
         {
             var applications = apRep.GetAll(oId);
-            return Ok(applications);
-        }
-        [Route("students/{sId}/applications", Name = "applicationsOfStudent")]
-        public IHttpActionResult GetApplications(int sId)
-        {
-            var applications = apRep.GetStudentsApplicationToUniversity(sId);
+            foreach(ApplictionsToUniversity appliction in applications)
+            {
+                linkGen(appliction);
+            }
             return Ok(applications);
         }
 
-        [Route("univerisityOffer/{oId}/applications/{id}", Name = "GetApplicationById")]
+        [Route("applications")]
+        [BasicAuthentication]
+        // GET api/<controller>
+        public IHttpActionResult GetAllApplications(int uId)
+        {
+            
+            var applications = apRep.GetAllApplications(uId);
+            foreach (ApplictionsToUniversity appliction in applications)
+            {
+                linkGen(appliction);
+            }
+            return Ok(applications);
+        }
+        
+
+        [Route("Offers/{oId}/applications/{id}", Name = "GetApplicationById")]
+        [BasicAuthentication]
         // GET api/<controller>/5
         public IHttpActionResult Get(int id, int oId)
         {
             var application = apRep.Get(id);
+            linkGen(application);
             return Ok(application);
         }
 
-        [Route("univerisityOffer/{oId}/applications")]
+        /*
+        [Route("")]
+        [BasicAuthentication]
         // POST api/<controller>
         public IHttpActionResult Post([FromBody]ApplictionsToUniversity appliction, [FromUri]int oId)
         {
@@ -45,22 +64,36 @@ namespace ScholarshipHubRestApi.Controllers
             string url = Url.Link("GetApplicationById", new { oId = appliction.UniversityOfferID, id = appliction.id });
             return Created(url, appliction);
         }
+        */
 
-        [Route("univerisityOffer/{oId}/applications/{id}")]
+        [Route("Offers/{oId}/applications/{id}")]
+        [BasicAuthentication]
         // PUT api/<controller>/5
         public IHttpActionResult Put([FromUri]int id, [FromUri]int oId, [FromBody]ApplictionsToUniversity appliction)
         {
             apRep.Update(appliction);
+            linkGen(appliction);
             return Ok(appliction);
 
         }
 
-        [Route("univerisityOffer/{oId}/applications/{id}")]
+        [Route("Offers/{oId}/applications/{id}")]
+        [BasicAuthentication]
         // DELETE api/<controller>/5
         public IHttpActionResult Delete(int id)
         {
             apRep.Delete(id);
             return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        [NonAction]
+        public void linkGen(ApplictionsToUniversity appliction)
+        {
+            appliction.links.Add(new Links() { HRef = "http://localhost:44348/api/universities/" + appliction.UniversityOffer.UniversityId + "/applications", Method = "GET", Rel = "Get all the applications list to an university" });
+            appliction.links.Add(new Links() { HRef = "http://localhost:44348/api/universities/" + appliction.UniversityOffer.UniversityId + "/offers/" + appliction.UniversityOfferID + "/applications", Method = "GET", Rel = "Get all the applications list to an scholarship offer of an university" });
+            appliction.links.Add(new Links() { HRef = "http://localhost:44348/api/universities/" + appliction.UniversityOffer.UniversityId + "/offers/" + appliction.UniversityOfferID + "/applications/"+appliction.id, Method = "GET", Rel = "Get an specified application to an university offer by ID" });
+            appliction.links.Add(new Links() { HRef = "http://localhost:44348/api/universities/" + appliction.UniversityOffer.UniversityId + "/offers/" + appliction.UniversityOfferID + "/applications"+appliction.id, Method = "PUT", Rel = "Modify an existing application resource" });
+            appliction.links.Add(new Links() { HRef = "http://localhost:44348/api/universities/" + appliction.UniversityOffer.UniversityId + "/offers/" + appliction.UniversityOfferID + "/applications", Method = "DELETE", Rel = "Delete an existing application resource" });
         }
     }
 }
