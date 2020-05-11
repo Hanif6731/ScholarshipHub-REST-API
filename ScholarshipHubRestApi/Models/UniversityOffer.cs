@@ -30,8 +30,8 @@ namespace ScholarshipHubRestApi.Models
         public System.DateTime Deadline { get; set; }
         public System.DateTime StartDate { get; set; }
         public int UniversityId { get; set; }
-
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         [XmlIgnore, JsonIgnore] public virtual ICollection<ApplictionsToUniversity> ApplictionsToUniversities { get; set; }
         public virtual University University { get; set; }
         public List<Links> links = new List<Links>();

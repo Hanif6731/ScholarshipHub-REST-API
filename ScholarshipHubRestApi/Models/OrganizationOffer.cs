@@ -31,11 +31,10 @@ namespace ScholarshipHubRestApi.Models
         public string universityName { get; set; }
         public string totalseat { get; set; }
         public int organization_id { get; set; }
-
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         [XmlIgnore, JsonIgnore] public virtual ICollection<ApplicationsToOrganization> ApplicationsToOrganizations { get; set; }
         public virtual Organisation Organisation { get; set; }
         public List<Links> links = new List<Links>();
-
     }
 }

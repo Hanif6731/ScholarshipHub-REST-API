@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 
 namespace ScholarshipHubRestApi.Controllers
@@ -23,10 +24,12 @@ namespace ScholarshipHubRestApi.Controllers
         public IHttpActionResult Get()
         {
             var universities = uniRep.GetAll();
+            var filePath = HttpContext.Current.Server.MapPath("~/Media/Files");
 
-            foreach(University university in universities)
+            foreach (University university in universities)
             {
                 linkGen(university);
+                university.ApprovalPath = filePath + "/" + university.ApprovalPath;
             }
 
             return Ok(universities);
@@ -38,16 +41,17 @@ namespace ScholarshipHubRestApi.Controllers
         public IHttpActionResult Get(string username)
         {
             var university = uniRep.GetUniversity(username);
+            var filePath = HttpContext.Current.Server.MapPath("~/Media/Files");
+            university.ApprovalPath = filePath + "/" + university.ApprovalPath;
             linkGen(university);
             return Ok(university);
         }
 
         [Route("")]
-        [BasicAuthentication]
+        //[BasicAuthentication]
         // POST api/<controller>
         public IHttpActionResult Post([FromBody]University university)
         {
-            
             var user = new User();
             user.Username = university.username;
             user.Password = university.password;

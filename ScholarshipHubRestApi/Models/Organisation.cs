@@ -36,8 +36,8 @@ namespace ScholarshipHubRestApi.Models
         public string Information { get; set; }
         public string Description { get; set; }
     
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        [XmlIgnore,JsonIgnore]public virtual ICollection<OrganizationOffer> OrganizationOffers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [XmlIgnore, JsonIgnore] public virtual ICollection<OrganizationOffer> OrganizationOffers { get; set; }
         public List<Links> links = new List<Links>();
     }
 }

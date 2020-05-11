@@ -9,7 +9,7 @@
 
 namespace ScholarshipHubRestApi.Models
 {
-    using Newtonsoft.Json;
+using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.Xml.Serialization;
@@ -37,8 +37,8 @@ namespace ScholarshipHubRestApi.Models
         public string Vision { get; set; }
         public string descripton { get; set; }
         public string ApprovalPath { get; set; }
-
-        // [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         [XmlIgnore, JsonIgnore] public virtual ICollection<UniversityOffer> UniversityOffers { get; set; }
         public List<Links> links = new List<Links>();
     }

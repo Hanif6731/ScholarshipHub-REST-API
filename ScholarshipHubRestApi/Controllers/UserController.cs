@@ -11,7 +11,7 @@ using System.Web.Http;
 
 namespace ScholarshipHubRestApi.Controllers
 {
-    [RoutePrefix("api/users")][BasicAuthentication]
+    [RoutePrefix("api/users")]//[BasicAuthentication]
     public class UserController : ApiController
     {
         IUserRepository uRep = new UserRepository();
@@ -37,20 +37,33 @@ namespace ScholarshipHubRestApi.Controllers
         }
 
         [Route("{username}/", Name ="GetUserByUsername")]
-        [BasicAuthentication]
+        //[BasicAuthentication]
         // GET api/<controller>/5
         public IHttpActionResult Get(string username)
         {
             var user = uRep.GetUser(username);
-
-            if (uRep.Get(user) == 1)
+            try
             {
-                linkGen(user);
-                return Ok(user);
+                if (uRep.Get(user) == 1)
+                {
+                    linkGen(user);
+                    return Ok(user);
+                }
+                else
+                {
+                    return StatusCode(HttpStatusCode.NoContent);
+                }
             }
-            else
+            catch(Exception)
             {
-                return StatusCode(HttpStatusCode.NoContent);
+                if (user == null)
+                {
+                    return StatusCode(HttpStatusCode.NoContent);
+                }
+                else
+                {
+                    return StatusCode(HttpStatusCode.InternalServerError);
+                }
             }
         }
 
