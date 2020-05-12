@@ -36,6 +36,41 @@ namespace ScholarshipHubRestApi.Controllers
             }
         }
 
+
+        [Route("{username}/get", Name = "GetUser")]
+        [BasicAuthentication]
+        // GET api/<controller>/5
+        public IHttpActionResult GetUser(string username)
+        {
+            var user = uRep.GetUser(username);
+            try
+            {
+                if (uRep.Get(user) == 1)
+                {
+                    //user.Password = null;
+                    linkGen(user);
+                    return Ok(user);
+                }
+                else
+                {
+                    return StatusCode(HttpStatusCode.NoContent);
+                }
+            }
+            catch (Exception)
+            {
+                if (user == null)
+                {
+                    return StatusCode(HttpStatusCode.NoContent);
+                }
+                else
+                {
+                    return StatusCode(HttpStatusCode.InternalServerError);
+                }
+            }
+        }
+
+
+
         [Route("{username}/", Name ="GetUserByUsername")]
         //[BasicAuthentication]
         // GET api/<controller>/5
@@ -46,6 +81,7 @@ namespace ScholarshipHubRestApi.Controllers
             {
                 if (uRep.Get(user) == 1)
                 {
+                    user.Password = null;
                     linkGen(user);
                     return Ok(user);
                 }
