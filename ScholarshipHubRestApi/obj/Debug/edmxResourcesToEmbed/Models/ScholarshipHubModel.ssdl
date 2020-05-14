@@ -120,7 +120,7 @@
     <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Zip" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Motto" Type="varchar" MaxLength="500" Nullable="false" />
-    <Property Name="Mission" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Mission" Type="varchar(max)" Nullable="false" />
     <Property Name="Vision" Type="varchar(max)" Nullable="false" />
     <Property Name="descripton" Type="varchar(max)" Nullable="false" />
     <Property Name="ApprovalPath" Type="varchar(max)" Nullable="false" />

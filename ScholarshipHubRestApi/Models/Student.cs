@@ -35,7 +35,7 @@ namespace ScholarshipHubRestApi.Models
         public string DesiredDegree { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ApplicationsToOrganization> ApplicationsToOrganizations { get; set; }
+        [XmlIgnore, JsonIgnore] public virtual ICollection<ApplicationsToOrganization> ApplicationsToOrganizations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         [XmlIgnore, JsonIgnore] public virtual ICollection<ApplictionsToUniversity> ApplictionsToUniversities { get; set; }
         public List<Links> links = new List<Links>();

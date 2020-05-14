@@ -9,7 +9,7 @@
 
 namespace ScholarshipHubRestApi.Models
 {
-using Newtonsoft.Json;
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.Xml.Serialization;

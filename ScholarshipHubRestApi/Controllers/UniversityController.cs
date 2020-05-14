@@ -41,8 +41,9 @@ namespace ScholarshipHubRestApi.Controllers
         public IHttpActionResult Get(string username)
         {
             var university = uniRep.GetUniversity(username);
-            var filePath = HttpContext.Current.Server.MapPath("~/Media/Files");
-            university.ApprovalPath = filePath + "/" + university.ApprovalPath;
+            //var filePath = HttpContext.Current.Server.MapPath("~/Media/Files");
+            //filePath = filePath.Replace("\\", "/");
+            //university.ApprovalPath = filePath + "/" + university.ApprovalPath;
             linkGen(university);
             return Ok(university);
         }
