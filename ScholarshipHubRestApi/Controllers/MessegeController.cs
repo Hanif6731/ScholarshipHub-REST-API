@@ -15,12 +15,12 @@ namespace ScholarshipHubRestApi.Controllers
     public class MessegeController : ApiController
     {
         IMessegeRepository msgRep = new MessegeRepository();
-        [Route("{fromUserEmail}/")]
+        [Route("")]
         [BasicAuthentication]
         // GET api/<controller>
-        public IHttpActionResult Get(string fromUserEmail)
+        public IHttpActionResult Get(string email)
         {
-            var msgs = msgRep.GetAll(fromUserEmail);
+            var msgs = msgRep.GetAll(email);
             foreach (Messege msg in msgs)
             {
                 linkGen(msg);

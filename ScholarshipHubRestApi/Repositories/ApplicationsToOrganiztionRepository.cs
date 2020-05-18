@@ -18,5 +18,10 @@ namespace ScholarshipHubRestApi.Repository
         {
             return context.Set<ApplicationsToOrganization>().Where(u => u.StudentId==studentId).ToList();
         }
+
+        public ApplicationsToOrganization GetStudentsApplicationToOrganization(int studentId,int appId)
+        {
+            return context.Set<ApplicationsToOrganization>().SingleOrDefault(u => u.StudentId == studentId && u.id==appId);
+        }
     }
 }

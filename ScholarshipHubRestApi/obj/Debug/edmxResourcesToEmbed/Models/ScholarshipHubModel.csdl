@@ -140,10 +140,10 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Title" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="OfferedDegree" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Requirements" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Requirements" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Deadline" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="UniversityId" Type="Int32" Nullable="false" />

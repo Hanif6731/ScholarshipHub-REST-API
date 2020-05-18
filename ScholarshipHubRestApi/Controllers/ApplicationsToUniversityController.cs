@@ -18,12 +18,12 @@ namespace ScholarshipHubRestApi.Controllers
         [Route("Offers/{oId}/applications")]
         [BasicAuthentication]
         // GET api/<controller>
-        public IHttpActionResult Get(int oId)
+        public IHttpActionResult Get(int uId,int oId)
         {
             var applications = apRep.GetAll(oId);
             foreach(ApplictionsToUniversity appliction in applications)
             {
-                linkGen(appliction);
+                linkGen(appliction,uId);
             }
             return Ok(applications);
         }
@@ -37,7 +37,7 @@ namespace ScholarshipHubRestApi.Controllers
             var applications = apRep.GetAllApplications(uId);
             foreach (ApplictionsToUniversity appliction in applications)
             {
-                linkGen(appliction);
+                linkGen(appliction,uId);
             }
             return Ok(applications);
         }
@@ -46,10 +46,10 @@ namespace ScholarshipHubRestApi.Controllers
         [Route("Offers/{oId}/applications/{id}", Name = "GetApplicationById")]
         [BasicAuthentication]
         // GET api/<controller>/5
-        public IHttpActionResult Get(int id, int oId)
+        public IHttpActionResult Get(int id, int oId,int uId)
         {
             var application = apRep.Get(id);
-            linkGen(application);
+            linkGen(application,uId);
             return Ok(application);
         }
 
@@ -69,10 +69,11 @@ namespace ScholarshipHubRestApi.Controllers
         [Route("Offers/{oId}/applications/{id}")]
         [BasicAuthentication]
         // PUT api/<controller>/5
-        public IHttpActionResult Put([FromUri]int id, [FromUri]int oId, [FromBody]ApplictionsToUniversity appliction)
+        public IHttpActionResult Put([FromBody]ApplictionsToUniversity appliction, [FromUri]int id, [FromUri]int oId, [FromUri]int uId)
         {
+            appliction.id = id;
             apRep.Update(appliction);
-            linkGen(appliction);
+            linkGen(appliction,uId);
             return Ok(appliction);
 
         }
@@ -87,13 +88,14 @@ namespace ScholarshipHubRestApi.Controllers
         }
 
         [NonAction]
-        public void linkGen(ApplictionsToUniversity appliction)
+        public void linkGen(ApplictionsToUniversity appliction,int uniId)
         {
-            appliction.links.Add(new Links() { HRef = "http://localhost:44348/api/universities/" + appliction.UniversityOffer.UniversityId + "/applications", Method = "GET", Rel = "Get all the applications list to an university" });
-            appliction.links.Add(new Links() { HRef = "http://localhost:44348/api/universities/" + appliction.UniversityOffer.UniversityId + "/offers/" + appliction.UniversityOfferID + "/applications", Method = "GET", Rel = "Get all the applications list to an scholarship offer of an university" });
-            appliction.links.Add(new Links() { HRef = "http://localhost:44348/api/universities/" + appliction.UniversityOffer.UniversityId + "/offers/" + appliction.UniversityOfferID + "/applications/"+appliction.id, Method = "GET", Rel = "Get an specified application to an university offer by ID" });
-            appliction.links.Add(new Links() { HRef = "http://localhost:44348/api/universities/" + appliction.UniversityOffer.UniversityId + "/offers/" + appliction.UniversityOfferID + "/applications"+appliction.id, Method = "PUT", Rel = "Modify an existing application resource" });
-            appliction.links.Add(new Links() { HRef = "http://localhost:44348/api/universities/" + appliction.UniversityOffer.UniversityId + "/offers/" + appliction.UniversityOfferID + "/applications", Method = "DELETE", Rel = "Delete an existing application resource" });
+            
+            appliction.links.Add(new Links() { HRef = "http://localhost:44348/api/universities/" +uniId + "/applications", Method = "GET", Rel = "Get all the applications list to an university" });
+            appliction.links.Add(new Links() { HRef = "http://localhost:44348/api/universities/" + uniId + "/offers/" + appliction.UniversityOfferID + "/applications", Method = "GET", Rel = "Get all the applications list to an scholarship offer of an university" });
+            appliction.links.Add(new Links() { HRef = "http://localhost:44348/api/universities/" + uniId + "/offers/" + appliction.UniversityOfferID + "/applications/"+appliction.id, Method = "GET", Rel = "Get an specified application to an university offer by ID" });
+            appliction.links.Add(new Links() { HRef = "http://localhost:44348/api/universities/" + uniId + "/offers/" + appliction.UniversityOfferID + "/applications"+appliction.id, Method = "PUT", Rel = "Modify an existing application resource" });
+            appliction.links.Add(new Links() { HRef = "http://localhost:44348/api/universities/" + uniId + "/offers/" + appliction.UniversityOfferID + "/applications", Method = "DELETE", Rel = "Delete an existing application resource" });
         }
     }
 }

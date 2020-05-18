@@ -66,6 +66,8 @@ namespace ScholarshipHubRestApi.Controllers
         // DELETE api/<controller>/5
         public IHttpActionResult Delete(int id)
         {
+            IApplictionsToUniversityRepository appRepo =new ApplictionsToUniversityRepository();
+            appRepo.DeleteAll(id);
             offerRep.Delete(id);
             return StatusCode(HttpStatusCode.NoContent);
         }

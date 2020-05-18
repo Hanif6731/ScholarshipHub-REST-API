@@ -11,5 +11,6 @@ namespace ScholarshipHubRestApi.Interfaces
     {
         IEnumerable<ApplicationsToOrganization> GetAll(int uniId);
         IEnumerable<ApplicationsToOrganization> GetStudentsApplicationToOrganization(int id);
+        ApplicationsToOrganization GetStudentsApplicationToOrganization(int studentId, int appId);
     }
 }

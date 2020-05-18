@@ -130,10 +130,10 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Title" Type="varchar" MaxLength="500" Nullable="false" />
-    <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="varchar(max)" Nullable="false" />
     <Property Name="OfferedDegree" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Requirements" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Requirements" Type="varchar(max)" Nullable="false" />
     <Property Name="Deadline" Type="date" Nullable="false" />
     <Property Name="StartDate" Type="date" Nullable="false" />
     <Property Name="UniversityId" Type="int" Nullable="false" />

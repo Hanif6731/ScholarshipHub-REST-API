@@ -113,6 +113,11 @@
     <Compile Include="Controllers\ApplicationsToUniversityController.cs" />
     <Compile Include="Controllers\FileUploadController.cs" />
     <Compile Include="Controllers\MessegeController.cs" />
+    <Compile Include="Controllers\OfferOrgController.cs" />
+    <Compile Include="Controllers\OfferUniversityController.cs" />
+    <Compile Include="Controllers\OrgApplicationController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\UniversityApplicationController.cs" />
     <Compile Include="Controllers\UniversityController.cs" />
     <Compile Include="Controllers\UniversityOfferController.cs" />
     <Compile Include="Controllers\UserController.cs" />
