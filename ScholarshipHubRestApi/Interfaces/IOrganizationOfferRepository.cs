@@ -9,5 +9,6 @@ namespace ScholarshipHubRestApi.Interfaces
 {
     interface IOrganizationOfferRepository:IRepository<OrganizationOffer>
     {
+        IEnumerable<OrganizationOffer> GetAll(int id);
     }
 }

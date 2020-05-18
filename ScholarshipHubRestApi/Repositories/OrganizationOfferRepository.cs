@@ -9,9 +9,12 @@ namespace ScholarshipHubRestApi.Repository
 {
     public class OrganizationOfferRepository : Repository<OrganizationOffer>, IOrganizationOfferRepository
     {
-
-
+        public IEnumerable<OrganizationOffer> GetAll(int id)
+        {
+            return context.Set<OrganizationOffer>().Where(u => u.organization_id == id).ToList();
+        }
     }
 
-
 }
+
+
