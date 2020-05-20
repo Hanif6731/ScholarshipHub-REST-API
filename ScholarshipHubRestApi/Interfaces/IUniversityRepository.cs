@@ -10,5 +10,7 @@ namespace ScholarshipHubRestApi.Interfaces
     interface IUniversityRepository:IRepository<University>
     {
         University GetUniversity(string username);
+        //new IEnumerable<University> GetAll();
+        object GetUniversity(int id);
     }
 }

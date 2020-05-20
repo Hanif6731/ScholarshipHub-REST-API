@@ -13,5 +13,15 @@ namespace ScholarshipHubRestApi.Repository
         {
             return context.Set<University>().SingleOrDefault(u => u.username == username);
         }
+
+        /*public University GetUniversity(int id)
+        {
+            return context.Set<University>().SingleOrDefault(u => u.id==id);
+        }*/
+
+        object IUniversityRepository.GetUniversity(int id)
+        {
+            return context.Set<University>().SingleOrDefault(u => u.id == id);
+        }
     }
 }

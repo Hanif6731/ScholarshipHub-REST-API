@@ -11,15 +11,13 @@ namespace ScholarshipHubRestApi.Interfaces
     interface IAdminRepository: IRepository<Admin> 
     {
         new IEnumerable<Admin> GetAll();
-        Admin GetAdminByID(string username);
+        Admin GetAdminByID(int id);
         //Admin GetAdminByPayment();
         Admin GetAdminByName(string name);
         new Admin Get(int id);
         new void Insert(Admin entity);
         new void Update(Admin entity);
         new void Delete(int id);
-
-
-
+        object GetAdmin(string username);
     }
 }

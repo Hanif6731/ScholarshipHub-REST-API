@@ -14,12 +14,17 @@ namespace ScholarshipHubRestApi.Repository
         //ScholarshipHubDataContext context;
         //private int salarystatus;
 
-        
-        
 
-        public Admin GetAdminByID(string username)
+        public Admin GetAdmin(string username)
         {
-            return context.Set<Admin>().SingleOrDefault(admin => admin.username == username);
+            return context.Set<Admin>().SingleOrDefault(u => u.username == username);
+        }
+
+
+
+        public Admin GetAdminByID(int id)
+        {
+            return context.Set<Admin>().SingleOrDefault(admin => admin.id ==id );
         }
 
         public IEnumerable<Admin> GetAdminByPayment()
@@ -32,6 +37,9 @@ namespace ScholarshipHubRestApi.Repository
             return context.Set<Admin>().SingleOrDefault(admin => admin.name == name);
         }
 
-      
+        object IAdminRepository.GetAdmin(string username)
+        {
+            return context.Set<Admin>().SingleOrDefault(u => u.username == username);
+        }
     }
 }

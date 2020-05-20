@@ -13,5 +13,12 @@ namespace ScholarshipHubRestApi.Repository
         {
             return context.Set<UniversityOffer>().Where(u => u.UniversityId == id).ToList();
         }
+
+        public void getUniversityOfferByUid(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        
     }
 }

@@ -70,8 +70,9 @@ namespace ScholarshipHubRestApi.Controllers
         // PUT api/<controller>/5
         public IHttpActionResult Put([FromUri]int id, [FromUri]int oId, [FromBody]ApplicationsToOrganization appliction)
         {
+            appliction.id = id;
             apRep.Update(appliction);
-            linkGen(appliction);
+            //linkGen(appliction);
             return Ok(appliction);
 
         }
